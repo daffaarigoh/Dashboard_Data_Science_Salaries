@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 # Set Streamlit page config
 st.set_page_config(
-    page_title="Data Scientist Salary Insights",
+    page_title="Data Science Salary Insights",
     layout="wide",
     initial_sidebar_state="expanded"
 )
