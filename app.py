@@ -9,7 +9,7 @@ st.set_page_config(page_title="Data Scientist Salary Insights", layout="wide")
 # Load data
 @st.cache
 def load_data():
-    return pd.read_csv('DataScience_salaries_2024.csv')
+    return pd.read_csv('./DataScience_salaries_2024.csv')
 
 data = load_data()
 
