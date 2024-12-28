@@ -83,7 +83,7 @@ with col3:
     )
 
 # Tabs for different visualizations
-tab1, tab2, tab3 = st.tabs(["📊 Salary Analysis", "🌍 Geographic Insights", "📈 Trends"])
+tab1, tab2 = st.tabs(["📊 Salary Analysis", "📈 Trends"])
 
 with tab1:
     col1, col2 = st.columns(2)
@@ -112,20 +112,9 @@ with tab1:
         fig_remote.update_layout(showlegend=False)
         st.plotly_chart(fig_remote, use_container_width=True)
 
-with tab2:
-    # World map of salaries
-    avg_salary_by_country = filtered_data.groupby('company_location')['salary_in_usd'].mean().reset_index()
-    fig_map = px.choropleth(
-        avg_salary_by_country,
-        locations='company_location',
-        locationmode='ISO-3',
-        color='salary_in_usd',
-        title='Average Salaries Around the World',
-        color_continuous_scale='Viridis'
-    )
-    st.plotly_chart(fig_map, use_container_width=True)
-
     # Top 10 countries bar chart
+    st.subheader("Top 10 Countries by Average Salary")
+    avg_salary_by_country = filtered_data.groupby('company_location')['salary_in_usd'].mean().reset_index()
     top_countries = avg_salary_by_country.nlargest(10, 'salary_in_usd')
     fig_top = px.bar(
         top_countries,
@@ -133,11 +122,12 @@ with tab2:
         y='salary_in_usd',
         title='Top 10 Countries by Average Salary',
         color='salary_in_usd',
-        color_continuous_scale='Viridis'
+        color_continuous_scale='Viridis',
+        labels={'salary_in_usd': 'Average Salary (USD)', 'company_location': 'Country'}
     )
     st.plotly_chart(fig_top, use_container_width=True)
 
-with tab3:
+with tab2:
     # Add year-over-year trend if your dataset includes this information
     if 'work_year' in filtered_data.columns:
         yearly_trend = filtered_data.groupby('work_year')['salary_in_usd'].agg(['mean', 'median']).reset_index()
