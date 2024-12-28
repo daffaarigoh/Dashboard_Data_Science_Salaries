@@ -61,7 +61,7 @@ filtered_data = data[
 ]
 
 # Main content
-st.title("🔍 Data Scientist Salary Insights Dashboard")
+st.title("🔍 Data Science Salary Insights Dashboard")
 
 # Key metrics in columns
 col1, col2, col3 = st.columns(3)
